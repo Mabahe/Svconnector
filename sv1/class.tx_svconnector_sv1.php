@@ -36,7 +36,4 @@ abstract class tx_svconnector_sv1 extends tx_svconnector_base {
 	// No implementation, everything is inherited from base class
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/svconnector/sv1/class.tx_svconnector_sv1.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/svconnector/sv1/class.tx_svconnector_sv1.php']);
-}
 ?>
