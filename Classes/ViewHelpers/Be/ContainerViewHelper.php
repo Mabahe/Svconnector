@@ -34,7 +34,7 @@
  *
  * $Id$
  */
-class Tx_Svconnector_ViewHelpers_Be_ContainerViewHelper extends Tx_Fluid_ViewHelpers_Be_ContainerViewHelper {
+class Tx_Svconnector_ViewHelpers_Be_ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\ContainerViewHelper {
 	/**
 	 * Render start page with template.php and pageTitle
 	 *
@@ -53,7 +53,7 @@ class Tx_Svconnector_ViewHelpers_Be_ContainerViewHelper extends Tx_Fluid_ViewHel
 	 * @param array $samples Code samples to be loaded as JS settings (specific to "svconnector" extension)
 	 * @return string
 	 * @see template
-	 * @see t3lib_PageRenderer
+	 * @see \TYPO3\CMS\Core\Page\PageRenderer
 	 */
 	public function render($pageTitle = '', $enableJumpToUrl = TRUE, $enableClickMenu = TRUE, $loadPrototype = TRUE, $loadScriptaculous = FALSE, $scriptaculousModule = '', $loadExtJs = FALSE, $loadExtJsTheme = TRUE, $extJsAdapter = '', $enableExtJsDebug = FALSE, $addCssFile = NULL, $addJsFile = NULL, $samples = array()) {
 		$pageRenderer = $this->getDocInstance()->getPageRenderer();

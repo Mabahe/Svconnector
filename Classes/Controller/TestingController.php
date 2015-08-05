@@ -34,7 +34,7 @@
  *
  * $Id$
  */
-class Tx_Svconnector_Controller_TestingController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	/**
 	 * @var Tx_Svconnector_Domain_Repository_ConnectorRepository
 	 */
@@ -62,11 +62,11 @@ class Tx_Svconnector_Controller_TestingController extends Tx_Extbase_MVC_Control
 	 * Override this method to solve assign variables common for all actions
 	 * or prepare the view in another way before the action is called.
 	 *
-	 * @param Tx_Extbase_MVC_View_ViewInterface $view The view to be initialized
+	 * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view The view to be initialized
 	 * @return void
 	 * @api
 	 */
-	protected function initializeView(Tx_Extbase_MVC_View_ViewInterface $view) {
+	protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
 			// Get the sample configurations provided by the various connector services
 		$this->sampleConfigurations = $this->connectorRepository->findAllSampleConfigurations();
 		$view->assign('samples', $this->sampleConfigurations);
@@ -82,18 +82,18 @@ class Tx_Svconnector_Controller_TestingController extends Tx_Extbase_MVC_Control
 			// If there are any, display a warning about it
 		$unavailableServices = $this->connectorRepository->findAllUnavailable();
 		if (count($unavailableServices) > 0) {
-				/** @var $messageObject t3lib_FlashMessage */
-			$messageObject = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
-				Tx_Extbase_Utility_Localization::translate(
+				/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
+			$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'\TYPO3\CMS\Core\Messaging\FlashMessage',
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
 					'services.not.available',
 					'svconnector',
 					array(implode(', ', $unavailableServices))
 				),
 				'',
-				t3lib_FlashMessage::WARNING
+				\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
 			);
-			t3lib_FlashMessageQueue::addMessage($messageObject);
+			\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
 		}
 			// Get available services and pass them to the view
 		$availableServices = $this->connectorRepository->findAllAvailable();
@@ -102,25 +102,25 @@ class Tx_Svconnector_Controller_TestingController extends Tx_Extbase_MVC_Control
 				// If there are no available services, but some are not available, it means all installed connector
 				// services are unavailable. This is a weird situation, we issue a warning.
 			if (count($unavailableServices) > 0) {
-					/** @var $messageObject t3lib_FlashMessage */
-				$messageObject = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
-					Tx_Extbase_Utility_Localization::translate('no.services.available', 'svconnector'),
+					/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
+				$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('no.services.available', 'svconnector'),
 					'',
-					t3lib_FlashMessage::WARNING
+					\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
 				);
 
 				// If there are simply no services, we display a notice
 			} else {
-					/** @var $messageObject t3lib_FlashMessage */
-				$messageObject = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
-					Tx_Extbase_Utility_Localization::translate('no.services', 'svconnector'),
+					/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
+				$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('no.services', 'svconnector'),
 					'',
-					t3lib_FlashMessage::NOTICE
+					\TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE
 				);
 			}
-			t3lib_FlashMessageQueue::addMessage($messageObject);
+			\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
 		}
 
 			// Check if a request for testing was submitted
@@ -178,26 +178,26 @@ class Tx_Svconnector_Controller_TestingController extends Tx_Extbase_MVC_Control
 				}
 					// If the result is empty, issue an information message
 				if (empty($result)) {
-						/** @var $messageObject t3lib_FlashMessage */
-					$messageObject = t3lib_div::makeInstance(
-						't3lib_FlashMessage',
-						Tx_Extbase_Utility_Localization::translate('no.result', 'svconnector'),
+						/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
+					$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+						'\TYPO3\CMS\Core\Messaging\FlashMessage',
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('no.result', 'svconnector'),
 						'',
-						t3lib_FlashMessage::INFO
+						\TYPO3\CMS\Core\Messaging\FlashMessage::INFO
 					);
-					t3lib_FlashMessageQueue::addMessage($messageObject);
+					\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
 				}
 			}
 				// Catch the exception and display an error message
 			catch (Exception $e) {
-					/** @var $messageObject t3lib_FlashMessage */
-				$messageObject = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
-					Tx_Extbase_Utility_Localization::translate('service.error', 'svconnector', array($e->getMessage(), $e->getCode())),
+					/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
+				$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('service.error', 'svconnector', array($e->getMessage(), $e->getCode())),
 					'',
-					t3lib_FlashMessage::ERROR
+					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
 				);
-				t3lib_FlashMessageQueue::addMessage($messageObject);
+				\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
 			}
 		}
 		return $result;
@@ -211,9 +211,9 @@ class Tx_Svconnector_Controller_TestingController extends Tx_Extbase_MVC_Control
 	 */
 	protected function parseParameters($parametersString) {
 		$parameters = array();
-		$lines = t3lib_div::trimExplode("\n", $parametersString, TRUE);
+		$lines = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode("\n", $parametersString, TRUE);
 		foreach ($lines as $aLine) {
-			$lineParts = t3lib_div::trimExplode('=', $aLine, TRUE);
+			$lineParts = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('=', $aLine, TRUE);
 			$key = array_shift($lineParts);
 			$value = implode('=', $lineParts);
 				// Handle special case of value "tab"

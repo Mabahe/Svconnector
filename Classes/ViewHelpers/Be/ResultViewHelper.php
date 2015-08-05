@@ -34,7 +34,7 @@
  *
  * $Id$
  */
-class Tx_Svconnector_ViewHelpers_Be_ResultViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+class Tx_Svconnector_ViewHelpers_Be_ResultViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper {
 
 	/**
 	 * Renders the view helper

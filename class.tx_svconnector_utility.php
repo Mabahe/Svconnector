@@ -73,9 +73,9 @@ class tx_svconnector_utility {
 	 *        )
 	 * );
 	 *
-	 * NOTE: this method was written because t3lib_div::xml2array() is much too keyed
+	 * NOTE: this method was written because \TYPO3\CMS\Core\Utility\GeneralUtility::xml2array() is much too keyed
 	 * to TYPO3's specifics and produces weird or even outright wrong array structures.
-	 * On the other hand the reverse conversion is fine with t3lib_div::array2xml_cs().
+	 * On the other hand the reverse conversion is fine with \TYPO3\CMS\Core\Utility\GeneralUtility::array2xml_cs().
 	 *
 	 * @param string $string XML to parse
 	 * @throws Exception

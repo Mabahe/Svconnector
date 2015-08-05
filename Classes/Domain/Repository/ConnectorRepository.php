@@ -57,7 +57,7 @@ class Tx_Svconnector_Domain_Repository_ConnectorRepository {
 		if (isset($GLOBALS['T3_SERVICES']['connector'])) {
 			foreach ($GLOBALS['T3_SERVICES']['connector'] as $serviceKey => $serviceInfo) {
 					/** @var $serviceObject tx_svconnector_base */
-				$serviceObject = t3lib_div::makeInstance($serviceInfo['className']);
+				$serviceObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($serviceInfo['className']);
 					// If the service is available, add it to the list
 				if ($serviceObject->init()) {
 					$this->availableServices[$serviceKey] = $serviceInfo['title'];
@@ -107,7 +107,7 @@ class Tx_Svconnector_Domain_Repository_ConnectorRepository {
 		$configurationSamples = array();
 		foreach ($this->availableServices as $key => $title) {
 			$extension = $GLOBALS['T3_SERVICES']['connector'][$key]['extKey'];
-			$configurationFile = t3lib_extMgm::extPath($extension, 'Resources/Public/Samples/Configuration.txt');
+			$configurationFile = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extension, 'Resources/Public/Samples/Configuration.txt');
 			if (file_exists($configurationFile)) {
 				$configurationSamples[$key] = file_get_contents($configurationFile);
 			}

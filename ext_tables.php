@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	// Avoid loading the module when in the frontend or the Install Tool
 if (TYPO3_MODE == 'BE' && !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
 		// Register the backend module
-	Tx_Extbase_Utility_Extension::registerModule(
+	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		$_EXTKEY,
 		'tools', // Make module a submodule of 'tools' (admin)
 		'svconnector', // Submodule key

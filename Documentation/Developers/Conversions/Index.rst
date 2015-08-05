@@ -26,7 +26,7 @@ TYPO3's API. e.g.:
 
 .. code-block:: php
 
-   $xml = t3lib_div::array2xml_cs($phpArray);
+   $xml = \TYPO3\CMS\Core\Utility\GeneralUtility::array2xml_cs($phpArray);
 
 Again one's own conversion method may be used if needed.
 

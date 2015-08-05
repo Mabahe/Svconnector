@@ -24,7 +24,7 @@ after having included the base connector class:
 
 .. code-block:: php
 
-   require_once(t3lib_extMgm::extPath('svconnector', 'class.tx_svconnector_base.php'));
+   require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('svconnector', 'class.tx_svconnector_base.php'));
 
 If you're using namespaces, the class declaration will be like:
 
@@ -42,7 +42,7 @@ that:
 
 .. code-block:: php
 
-	t3lib_extMgm::addService($_EXTKEY,  'connector' /* sv type */,  'tx_svconnectorspecial_sv1' /* sv key */,
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService($_EXTKEY,  'connector' /* sv type */,  'tx_svconnectorspecial_sv1' /* sv key */,
 		array(
 			'title' => 'Special Connector',
 			'description' => 'Connect to a special server',
@@ -52,7 +52,7 @@ that:
 			'quality' => 50,
 			'os' => '',
 			'exec' => '',
-			'classFile' => t3lib_extMgm::extPath($_EXTKEY) . 'sv1/class.tx_svconnectorspecial_sv1.php',
+			'classFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'sv1/class.tx_svconnectorspecial_sv1.php',
 			'className' => 'tx_svconnectorspecial_sv1',
 		)
 	);

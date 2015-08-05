@@ -42,7 +42,7 @@ define('T3_ERR_SV_DISTANT_ERROR', -52); // returned response contains an error m
  *
  * $Id$
  */
-abstract class tx_svconnector_base extends t3lib_svbase {
+abstract class tx_svconnector_base extends \TYPO3\CMS\Core\Service\AbstractService {
 	protected $extKey = 'svconnector'; // The extension key
 	protected $parentExtKey = 'svconnector'; // A copy of the extension key so that it is not overridden by children classes
 	protected $extConfiguration; // The extension configuration
@@ -130,7 +130,7 @@ abstract class tx_svconnector_base extends t3lib_svbase {
 	public function postProcessOperations($parameters, $status) {
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$this->extKey]['postProcessOperations'])) {
 			foreach($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$this->extKey]['postProcessOperations'] as $className) {
-				$processor = &t3lib_div::getUserObj($className);
+				$processor = &\TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($className);
 				$processor->postProcessOperations($parameters, $status, $this);
 			}
 		}
@@ -164,7 +164,7 @@ abstract class tx_svconnector_base extends t3lib_svbase {
 	 */
 	protected function raiseError($message, $exceptionNumber, array $extraData) {
 		if (!empty($this->extConfiguration['debug'])) {
-			t3lib_div::devLog($message, $this->extKey, 3, $extraData);
+			\TYPO3\CMS\Core\Utility\GeneralUtility::devLog($message, $this->extKey, 3, $extraData);
 		}
 		throw new Exception($message, $exceptionNumber);
 	}
@@ -209,7 +209,7 @@ abstract class tx_svconnector_base extends t3lib_svbase {
 	 * Get an existing instance of the charset conversion class, depending on context.
 	 *
 	 * @throws Exception
-	 * @return t3lib_cs
+	 * @return \TYPO3\CMS\Core\Charset\CharsetConverter
 	 */
 	public function getCharsetConverter() {
 		if (TYPO3_MODE == 'FE') {
