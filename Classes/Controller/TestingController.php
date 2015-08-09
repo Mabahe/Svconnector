@@ -84,7 +84,7 @@ class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc
 		if (count($unavailableServices) > 0) {
 				/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
 			$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-				'\TYPO3\CMS\Core\Messaging\FlashMessage',
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
 					'services.not.available',
 					'svconnector',
@@ -93,7 +93,7 @@ class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc
 				'',
 				\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
 			);
-			\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
+			$this->controllerContext->getFlashMessageQueue()->enqueue($messageObject);
 		}
 			// Get available services and pass them to the view
 		$availableServices = $this->connectorRepository->findAllAvailable();
@@ -104,7 +104,7 @@ class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc
 			if (count($unavailableServices) > 0) {
 					/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
 				$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('no.services.available', 'svconnector'),
 					'',
 					\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
@@ -114,13 +114,13 @@ class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc
 			} else {
 					/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
 				$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('no.services', 'svconnector'),
 					'',
 					\TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE
 				);
 			}
-			\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
+			$this->controllerContext->getFlashMessageQueue()->enqueue($messageObject);
 		}
 
 			// Check if a request for testing was submitted
@@ -180,24 +180,24 @@ class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc
 				if (empty($result)) {
 						/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
 					$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-						'\TYPO3\CMS\Core\Messaging\FlashMessage',
+						'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('no.result', 'svconnector'),
 						'',
 						\TYPO3\CMS\Core\Messaging\FlashMessage::INFO
 					);
-					\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
+					$this->controllerContext->getFlashMessageQueue()->enqueue($messageObject);
 				}
 			}
 				// Catch the exception and display an error message
 			catch (Exception $e) {
 					/** @var $messageObject \TYPO3\CMS\Core\Messaging\FlashMessage */
 				$messageObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('service.error', 'svconnector', array($e->getMessage(), $e->getCode())),
 					'',
 					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
 				);
-				\TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($messageObject);
+				$this->controllerContext->getFlashMessageQueue()->enqueue($messageObject);
 			}
 		}
 		return $result;
@@ -224,5 +224,6 @@ class Tx_Svconnector_Controller_TestingController extends \TYPO3\CMS\Extbase\Mvc
 		}
 		return $parameters;
 	}
+
 }
 ?>
